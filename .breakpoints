@@ -1,0 +1,20 @@
+{
+  "files": {
+    "mysite/admin.py": [
+      {
+        "id": "7786c491-4dca-4aed-99a8-b186ce4ed414",
+        "line": 1,
+        "version": 1,
+        "index": 0
+      }
+    ],
+    "schedule/models.py": [
+      {
+        "id": "16fe8211-b8a7-4d72-89f4-89518891b349",
+        "line": 11,
+        "version": 43,
+        "index": 282
+      }
+    ]
+  }
+}

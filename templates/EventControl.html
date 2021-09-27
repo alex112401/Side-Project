@@ -1,0 +1,148 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>EventControl</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static "css/EventControl.css" %}">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    </head>
+
+    <body>
+
+
+                <div class="container-fluid" id="EventControl">
+                  <!-- {% block content %} -->
+
+                    {% verbatim %}
+                    <div class="row">
+
+                        <div class="col card text-center" id="EventInput">
+                            <div class="card-header">
+                                <h1>可用時間設定與新建事件</h1>
+                            </div>
+                            <div class="card-body">
+                                <div class="TimeInput" id="TimeInput">
+                                    <label for="eventname" class="form-label"><h3>可用時間</h3></label>                                   
+                                    <input class="form-control" type="number" id="emptytime" value=0 step="0.01" min="0">      
+                                    <div>                                      
+                                        <button class="btn btn-primary" id="timebtn" v-on:click="Setemptytime">設定可用時間</button>
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div class="mb-3">
+                                    <label for="eventname" class="form-label"><h3>事件名稱</h3></label>
+                                    <input class="form-control" list="datalistOptions" id="eventname" placeholder="EX: 會議 專案...">
+                                    <datalist id="datalistOptions">
+                                        <option value="晨會">
+                                        <option value="專案討論">
+                                        <option value="回報">
+                                        <option value="聚餐">
+                                    </datalist>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="eventdate" class="form-label"><h3>開始時間</h3></label>
+                                    <input class="form-control" type="date" id="eventdate" value="2021-09-22">
+                                </div>
+
+                                <div class="mb-3">    
+                                    <label for="eventdate" class="form-label"><h3>預估時間(小時)</h3></label>       
+                                    <input class="form-control" type="number" id = "eventcosttime" value=1 step="0.01" min="0">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="eventdate" class="form-label"><h3>緊急程度</h3></label>       
+                                    <select class="form-control" id = "emerge">
+                                        <option value="緊急">緊急</option>
+                                        <option value="重要">重要</option>
+                                        <option value="普通">普通</option>
+                                        <option value="可暫緩">可暫緩</option>
+                                    </select>
+                                </div>
+
+                                <button class="btn btn-primary" v-on:click="NewIncompleteEvent">建立事件</button>
+                            
+                            </div>
+                        </div>         
+
+                        <div class="col-8 card text-center">
+                            <div id="CharWrap">
+                                
+                                <div class="card-header">
+                                    <h1>統計圖表</h1>
+                                </div>
+
+                                <div class="card-body">
+                                    
+                                    <dailyaccom v-if="currenttab === '每日完成率'" :currenttab="currenttab" :eventlist="eventlist" :comeventlist="comeventlist">{{ SetDailyAccomChart() }}</dailyaccom>
+                                    <dailyeff v-if="currenttab === '每日效率'" :currenttab="currenttab" :comeventlist="comeventlist">{{ SetDailyEffChart() }}</dailyeff>
+                                    <emergechart v-if="currenttab === '緊急程度分布'" :currenttab="currenttab" :eventlist="eventlist" :comeventlist="comeventlist" ></emergechart>
+                                    <emergeeff v-if="currenttab === '緊急程度效率分布'" :currenttab="currenttab" :eventlist="eventlist" :comeventlist="comeventlist"></emergeeff>
+                                    
+                                    <div class="ChartSwitchBtn">       
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <button 
+                                                id="CharSwitchtBtn"                
+                                                v-for="tab in charttabs"
+                                                :key="tab"
+                                                class="btn btn-outline-primary btn-lg"
+                                                @click="currenttab = tab">
+                                                {{ tab }}
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div id="EventWrap">
+
+                                <div class="card-header">
+                                    <h1>事件管理</h1>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="EventSwitchBtn">        
+                                        <button 
+                                            id="SwitchIncompleteBtn"                
+                                            v-for="tab in tabs"
+                                            :key="tab"
+                                            class="btn btn-warning btn-lg"
+                                            @click="currentTab = tab">
+                                            {{ tab }}
+                                        </button>
+                                    </div>
+                    
+                                    <div class="EventSwitchWrap">
+                                        <tab-incomplete v-if="currentTab === '未完成'" :currenttab="currenttab" :emptytime="emptytime" :totaltime="totaltime" :comeventlist="comeventlist" :eventlist="eventlist"></tab-Incomplete>
+                                        <tab-complete v-if="currentTab === '已完成'" :currenttab="currenttab" :comeventlist="comeventlist" :eventlist="eventlist"></tab-Complete>
+                                    </div>
+                    
+                                    <div class="DeleteWrap">
+                                        <button id="DeleteBtn" class="btn rounded-pill bg-warning text-dark btn-lg" v-on:click="DeleteincomEvent">清空未完成紀錄</button>
+                                        <button id="DeleteBtn" class="btn rounded-pill bg-warning text-dark btn-lg" v-on:click="DeletecomEvent">清空完成紀錄</button>
+                                    </div>
+
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                                {% endverbatim %}
+                </div>
+
+
+
+          <!-- {% endblock %} -->
+    </body>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="{% static 'js/vue.js' %}"></script>
+        <script src="{% static 'js/echarts.js' %}"></script>
+        <script src="{% static 'js/EventControl.js' %}"></script>
+
+</html>
