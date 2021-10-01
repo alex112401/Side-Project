@@ -4,46 +4,104 @@
       {
         "id": "7786c491-4dca-4aed-99a8-b186ce4ed414",
         "line": 1,
-        "version": 1,
+        "version": 2,
         "index": 0
+      }
+    ],
+    "mysite/settings.py": [
+      {
+        "id": "dd6464dc-121a-4fbb-8832-b4dec9a0095e",
+        "line": 58,
+        "version": 17,
+        "index": 1630
+      }
+    ],
+    "mysite/urls.py": [
+      {
+        "id": "fff9f4b1-756a-4eff-825a-2f14e2ee1081",
+        "line": 7,
+        "version": 12,
+        "index": 104
+      }
+    ],
+    "schedule/forms.py": [
+      {
+        "id": "ac801e42-3ae1-480a-9bc4-125e38bca97e",
+        "line": 4,
+        "version": 160,
+        "index": 70
       }
     ],
     "schedule/models.py": [
       {
         "id": "71565a73-8819-494e-9489-d87fb56cbdce",
         "line": 6,
-        "version": 92,
+        "version": 111,
         "index": 93
       },
       {
         "id": "16fe8211-b8a7-4d72-89f4-89518891b349",
-        "line": 7,
-        "version": 63,
-        "index": 209
+        "line": 8,
+        "version": 111,
+        "index": 260
       },
       {
         "id": "bcada68d-fc8f-45ab-bfd7-b2b3d33d066e",
         "line": 11,
-        "version": 100,
+        "version": 111,
         "index": 383
       },
       {
         "id": "352124ef-67d1-47ae-bbea-bf11777636bc",
         "line": 12,
-        "version": 100,
+        "version": 111,
         "index": 410
       },
       {
         "id": "17323651-5991-4c91-b320-e66ca7baadd6",
-        "line": 15,
-        "version": 92,
-        "index": 515
+        "line": 19,
+        "version": 111,
+        "index": 816
       },
       {
         "id": "4c17b949-420d-407d-8c1f-c634bc39c2e8",
-        "line": 21,
-        "version": 100,
-        "index": 894
+        "line": 23,
+        "version": 111,
+        "index": 1021
+      }
+    ],
+    "schedule/urls.py": [
+      {
+        "id": "bcd0bd68-c4ab-4e51-a4a0-698ad6f8529f",
+        "line": 9,
+        "version": 82,
+        "index": 167
+      }
+    ],
+    "schedule/views.py": [
+      {
+        "id": "6c7763b6-7601-4911-9742-298be199dab9",
+        "line": 2,
+        "version": 381,
+        "index": 65
+      },
+      {
+        "id": "2b63f1a8-8524-44ce-9571-1764936256f0",
+        "line": 2,
+        "version": 381,
+        "index": 65
+      },
+      {
+        "id": "6e0e8a83-9e77-4966-9863-0eec31a20841",
+        "line": 2,
+        "version": 381,
+        "index": 65
+      },
+      {
+        "id": "37d6efc9-efa3-486b-b73e-7038028b8a50",
+        "line": 2,
+        "version": 381,
+        "index": 66
       }
     ]
   }

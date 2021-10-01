@@ -27,6 +27,7 @@ var emergecountlist=[0,0,0,0];
 
 var emergeeffnumlist=[0,0,0,0];
 
+var today = new Date();
 
 const app = new Vue({
 
@@ -342,12 +343,16 @@ const app = new Vue({
                     this.eventdate = document.getElementById("eventdate").value;
                     this.eventcosttime = parseFloat(document.getElementById("eventcosttime").value).toFixed(2);
                     this.emerge = document.getElementById("emerge").value;
+
+                    ///////eventlsit陣列push
                     this.eventlist.push(
                         {eventname: this.eventname, 
                         eventdate: this.eventdate, 
                         eventcosttime: this.eventcosttime, 
                         emerge:this.emerge}
                         );
+                    ///////
+                    
                     this.$emit('update', this.eventlist);
                     neweventdate = this.eventdate;
                     checkdate = neweventdate;
